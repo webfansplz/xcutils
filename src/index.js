@@ -1,1 +1,5 @@
-require('babel-polyfill');
+const formatTime = require('./formatTime/formatTime');
+
+module.exports = {
+  formatTime
+};
