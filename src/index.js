@@ -1,4 +1,4 @@
-const formatTime = require('./formatTime/formatTime');
+const formatResTime = require('./Time/formatResTime');
 module.exports = {
-  formatTime
+  formatResTime
 };
