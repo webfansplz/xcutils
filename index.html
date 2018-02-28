@@ -13,6 +13,19 @@
 </body>
 <script src="./public/xcutils.min.js"></script>
 <script>
+  const formatDate = (time = new Date(), format = 'YY-MM-DD hh:mm:ss') => {
+    //年
+
+    console.log(format.indexOf('YY'))
+    console.log(format.indexOf('MM'))
+    console.log(format.indexOf('DD'))
+    console.log(format.indexOf('YY'))
+
+    return;
+    return Object.values(dateList).reduce((a, b) => a + b, '');
+  };
+  const val = formatDate(new Date(), 'YY-MM-DD')
+  console.log(val)
 </script>
 
 </html>
