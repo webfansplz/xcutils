@@ -7,37 +7,33 @@
  */
 const formatResTime = (num, format = 'hh:mm:ss') => {
   if (!num) return;
-  //ms->s
   num /= 1000;
-  const reg_d = /dd(\S|\s)*hh/,
-    reg_h = /hh(\S|\s)*mm/,
-    reg_m = /mm(\S|\s)*ss/,
-    reg_s = /ss(\S|\s)*/;
-  const timerList = {};
-  //日
-  if (format.match(reg_d)) {
-    let d = parseInt(num / 86400),
-      f = format.match(reg_d)[1] || '';
-    timerList.day = d < 10 ? '0' + d + f : d + f;
-  }
-  //时
-  if (format.match(reg_h)) {
-    let h = parseInt(num / 3600),
-      f = format.match(reg_h)[1] || '';
-    timerList.hour = (h > 60 ? (h = h - 60) : h) < 10 ? '0' + h + f : h + f;
-  }
-  //分
-  if (format.match(reg_m)) {
-    let m = parseInt(num / 60),
-      f = format.match(reg_m)[1] || '';
-    timerList.min = (m > 60 ? (m = m - 60) : m) < 10 ? '0' + m + f : m + f;
-  }
-  //秒
-  if (format.match(reg_s)) {
-    let s = parseInt(num % 60),
-      f = format.match(reg_s)[1] || '';
-    timerList.sec = (s > 60 ? (m = s - 60) : s) < 10 ? '0' + s + f : s + f;
-  }
-  return Object.values(timerList).reduce((a, b) => a + b, '');
+  let h = parseInt(num / 3600),
+    m = parseInt(num / 60),
+    s = parseInt(num % 60);
+  const v_list = {
+    //时
+    hh: (h > 60 ? (h -= 60) : h) < 10 ? '0' + h : h,
+    //分
+    mm: (m > 60 ? (m -= 60) : m) < 10 ? '0' + m : m,
+    //秒
+    ss: (s > 60 ? (s -= 60) : s) < 10 ? '0' + s : s
+  };
+  return [
+    {
+      id: format.indexOf('hh'),
+      v: v_list.hh + format.charAt(format.indexOf('hh') + 2)
+    },
+    {
+      id: format.indexOf('mm'),
+      v: v_list.mm + format.charAt(format.indexOf('mm') + 2)
+    },
+    {
+      id: format.indexOf('ss'),
+      v: v_list.ss + format.charAt(format.indexOf('ss') + 2)
+    }
+  ]
+    .filter(v => v.id > -1)
+    .reduce((a, b) => a + b.v, '');
 };
 module.exports = formatResTime;
