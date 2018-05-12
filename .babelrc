@@ -6,6 +6,7 @@
         "modules": false
       }
     ],
-    "stage-2"
-  ]
+    "stage-1"
+  ],
+  "plugins": ["transform-runtime", "transform-es2015-modules-umd"]
 }
